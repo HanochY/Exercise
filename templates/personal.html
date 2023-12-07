@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <style type="text/css">
+        :root{
+            --fullscreen-height: 100vh;
+            --fullscreen-width: 100vw;
+            --background-color: white;
+            --border-width: 1px;
+            --border-style: solid;
+            --border-color: rgb(212, 212, 212);
+            --border: var(--border-width) var(--border-style) var(--border-color);
+            --logo-height: 200px;
+            --logo-border-radius: 50px;
+            --form-border-radius: 20px;
+            --input-border-radius: 18px;
+            --input-font-size: 18px;
+            --button-color: #04AA6D;
+            --button-transition-time: 0.4s;
+            --sidenav-width: 0px;
+            --sidenav-transition-time: 0.4s;
+        }
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            height: var(--fullscreen-height);
+            width: var(--fullscreen-width);
+            align-items: center;
+            justify-content: left;
+            background-color: var(--background-color);
+            margin: 0;
+        }
+        .info{
+            display: flex;
+            flex-direction: row;
+            width: max-content;
+            align-items: center;
+            justify-content: left;
+            font-size: 24px;
+        }
+        
+        .openButton {
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+
+        }
+        .sideNav {
+            height: 100vw;
+            width: var(--sidenav-width);
+            z-index: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            overflow-x: hidden;
+            transition: var(--sidenav-transition-time);
+            padding-top: 60px;
+        }
+
+        .sideNav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: gray;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sideNav a:hover {
+            color: whitesmoke;
+        }
+
+        .sideNav .closeButton {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: clip;
+            font-size: 36px;
+            padding: 10px 10px 10px 10px;
+        }
+
+    </style>
+    <script>
+        function openMySidenav(){
+            document.querySelector(':root').style.setProperty('--sidenav-width', '250px');
+        }
+        function closeMySidenav(){
+            document.querySelector(':root').style.setProperty('--sidenav-width', '0px');
+            return false;
+        }
+    </script>
+    <head>
+        <title>Kool Kluckers Klub</title>
+    </head>
+    <body>
+        <div id="mySidenav" class="sideNav">
+            <a href="#" class="closeButton" onclick="closeMySidenav()">&times;</a>
+            <a href="/forum">Forum</a>
+            <a href="/account_info">My Account</a>
+            <a href="/">Login</a>
+        </div>
+        <span class="openButton" onclick="openMySidenav()">&#9776; Menu</span>
+        <h1>Account Info</h1>
+        <div class="info">
+            <p>Username: {{username}}</p>
+        </div>
+    </body>
+</html>

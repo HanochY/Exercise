@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "Aa123456"
@@ -16,7 +17,7 @@ class User(database.Model):
       self.name = name
       self.password = password
 
-class Message(database.Model):
+class Comment(database.Model):
    _id = database.Column('id', database.Integer, primary_key = True)
    user = database.Column(database.String(32))
    content = database.Column(database.String(32))
@@ -24,9 +25,16 @@ class Message(database.Model):
       self.user = user
       self.content = content
 
+class Comment_with_timestamp(Comment):
+   timestamp = database.Column(database.String(32))
+   def __init__(self, user, content, timestamp):
+      super().__init__(user, content)
+      self.timestamp = datetime.now()
+
+
 def commit_login(username):
    session['user'] = username
-   return redirect(url_for('user'))
+   return redirect(url_for('forum'))
 
 def create_user(username, password):
    new_user = User(username, password)
@@ -102,22 +110,29 @@ def home():
        return "ERROR: INVALID REQUEST"
 
 
-@app.route('/user', methods=['POST','GET'])
-def user():
+@app.route('/forum', methods=['POST','GET'])
+def forum():
    if session['user'] is not None:
       if request.method == 'POST':
          if request.form["button"] == "submit":
             user = session['user']
-            content = request.form["forum_message"]
+            content = request.form["forum_comment"]
             if content:
-               new_message = Message(user, content)
-               database.session.add(new_message)
+               new_comment = Comment(user, content)
+               database.session.add(new_comment)
                database.session.commit()
-            return redirect(url_for('user'))
+            return redirect(url_for('forum'))
       elif request.method == 'GET':
-         return render_template("forum.html", username=session['user'], messages=Message.query.all())
+         return render_template("forum.html", username=session['user'], comments=Comment.query.all())
       else:
          return "ERROR: INVALID REQUEST"
+   else:
+      return redirect(url_for("home"))
+
+@app.route('/account_info')
+def account_info():
+   if session['user'] is not None:
+      return render_template("personal.html", username=session['user'])
    else:
       return redirect(url_for("home"))
 
