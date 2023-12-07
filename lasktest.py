@@ -109,19 +109,33 @@ def home():
    else:
        return "ERROR: INVALID REQUEST"
 
+def commit_comment_submission():
+   user = session['user']
+   content = request.form["forum_comment"]
+   new_comment = Comment(user, content)
+   database.session.add(new_comment)
+   database.session.commit()
+
+def validate_comment_content():
+   content = request.form["forum_comment"]
+   return content is not None 
+
+def check_form_submitted_comment():
+   return request.form["button"] == "submit"
+
+def post_comment():
+   if check_form_submitted_comment():
+      if validate_comment_content():
+         commit_comment_submission()
+
+
 
 @app.route('/forum', methods=['POST','GET'])
 def forum():
    if session['user'] is not None:
       if request.method == 'POST':
-         if request.form["button"] == "submit":
-            user = session['user']
-            content = request.form["forum_comment"]
-            if content:
-               new_comment = Comment(user, content)
-               database.session.add(new_comment)
-               database.session.commit()
-            return redirect(url_for('forum'))
+         post_comment()
+         return redirect(url_for("forum"))
       elif request.method == 'GET':
          return render_template("forum.html", username=session['user'], comments=Comment.query.all())
       else:
