@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+    <style type="text/css">
+        :root{
+            --fullscreen-height: 100vh;
+            --fullscreen-width: 100vw;
+            --background-color: white;
+            --border-width: 1px;
+            --border-style: solid;
+            --border-color: rgb(212, 212, 212);
+            --border: var(--border-width) var(--border-style) var(--border-color);
+            --logo-height: 200px;
+            --logo-border-radius: 5vh;
+            --form-border-radius: 20px;
+            --input-border-radius: 18px;
+            --input-font-size: 18px;
+            --button-color: #04AA6D;
+            --button-transition-time: 0.4s;
+        }
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            height: var(--fullscreen-height);
+            width: var(--fullscreen-width);
+            align-items: center;
+            justify-content: center;
+            background-color: var(--background-color);
+            margin: 0;
+        }
+        .cock-img {
+            height: 36px;
+            width: 36px;
+            border-radius: var(--logo-border-radius);
+            border: var(--border);
+            margin: 8px;
+            margin-top: 18px;
+        }
+        .forum{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100vw;
+            height: 90vh;
+            justify-content: left;
+            align-items: center;
+        }
+        .submission-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: max-content;
+            width: fit-content;
+        }
+        .textarea{
+            border-radius: var(--input-border-radius);
+            border: var(--border);
+            height: 100px;
+            width: 900px;
+            font-size: var(--input-font-size);
+            padding: 18px;
+            margin: 9px;
+            margin-left: 21px;
+            margin-right: 21px;
+            resize: none;
+            overflow-y: hidden;
+        }
+        .message-cotainer{
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+            height: max-content;
+            margin-left: 40px;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+        .message-and-picture{
+            display: flex;
+            flex-direction: row;
+            width: max-content;
+            height: fit-content;
+            justify-content: left;
+            align-items: start;
+        }
+        .message {
+            width: max-content;
+            height: fit-content;
+            border-radius: var(--input-border-radius);
+            border: var(--border);
+            margin: 5px;
+        }
+        .message-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
+        .message-content {
+            font-weight: normal;
+            font-size: 18px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+
+        .button {
+            font-weight: Bold;
+            border-radius: 10px;
+            background-color: var(--background-color); 
+            color: black; 
+            border: 2px solid var(--button-color);
+            text-align: center;
+            font-size: 14px;
+            transition-duration: var(--button-transition-time);
+            cursor: pointer;
+            padding: 16px 32px;
+            margin: 9px;
+            margin-left: 21px;
+            margin-right: 21px;
+            width: 918px;
+            padding: 18px;
+        }
+
+        .button:hover {
+          background-color: var(--button-color);
+          color: var(--background-color);
+        }
+
+    </style>
+    <head>
+        <title>Kool Kluckers Klub</title>
+    </head>
+    <body>
+        <h1>Welcome {{ username }} to our cocky little forum</h1>
+        <div class="forum">
+            <form class="submission-form" method="post" id="submit">
+                <textarea maxlength="256" class="textarea" type="text" id="forum_message" name="forum_message"></textarea>
+                <input class="button" type="submit" name="button" value="submit">
+            </form>
+            <div class="message-cotainer">
+                {% for message in messages %}
+                    <div class="message-and-picture">
+                        <img class="cock-img" src="{{url_for('static', filename='wecluck.png')}}" alt="we live for this shit">
+                        <div class="message">
+                            <p class="message-title">{{message.user}}</p>
+                            <p class="message-content">{{message.content}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
