@@ -1,0 +1,12 @@
+
+{% block navbar %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='sidenav_style.css') }}">
+    <script src="{{url_for('static', filename='sidenav.js')}}"></script>
+    <div id="mySidenav" class="sideNav">
+        <a href="#" class="closeButton" onclick="closeMySidenav()">&times;</a>
+        <a href="/forum">Forum</a>
+        <a href="/account_info">My Account</a>
+        <a href="/">Log Out</a>
+    </div>
+    <span class="openButton" onclick="openMySidenav()">&#9776; Menu</span>
+{% endblock %}

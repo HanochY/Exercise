@@ -1,0 +1,64 @@
+:root{
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: rgb(212, 212, 212);
+    --border: var(--border-width) var(--border-style) var(--border-color);
+    --logo-height: 200px;
+    --logo-border-radius: 50px;
+    --form-border-radius: 20px;
+    --input-border-radius: 18px;
+    --input-font-size: 18px;
+    --button-color: #04AA6D;
+    --button-transition-time: 0.4s;
+    --sidenav-width: 0px;
+    --sidenav-transition-time: 0.4s;
+}
+
+.openButton {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+.sideNav {
+    height: 100vw;
+    width: var(--sidenav-width);
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    transition: var(--sidenav-transition-time);
+    padding-top: 60px;
+}
+
+.sideNav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: gray;
+    display: block;
+    transition: 0.3s;
+}
+
+.sideNav a:hover {
+    color: whitesmoke;
+}
+
+.sideNav .closeButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: clip;
+    font-size: 36px;
+    padding: 10px 10px 10px 10px;
+}

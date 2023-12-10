@@ -1,0 +1,19 @@
+:root{
+    --fullscreen-height: 100vh;
+    --fullscreen-width: 100vw;
+    --background-color: white;
+}
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: var(--fullscreen-height);
+    width: var(--fullscreen-width);
+    align-items: center;
+    justify-content: left;
+    background-color: var(--background-color);
+    margin: 0;
+}

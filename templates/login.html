@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+{% endblock %}
+{% block content %}
+    <img class="cock-img" src="{{url_for('static', filename='wecluck.png')}}" alt="we live for this shit">
+    <div class="horizontal-forms-div">
+        <form class="vertical-form" method="post" id="register">
+            <h1 class="signin-signup-title">Sign Up</h1>
+            <label for="register_username">Username</label>
+            <input class="input" type="text" id="register_username" name="register_username">
+            <label for="register_password">Password</label>
+            <input class="input" type="password" id="register_password" name="register_password">
+            <label for="confirm_register_password">Confirm Password</label>
+            <input class="input" type="password" id="confirm_register_password" name="confirm_register_password">
+            <input class="button" type="submit" name="button" value="register">
+        </form>
+        <form class="vertical-form" method="post" id="login">
+            <h1 class="signin-signup-title">Sign In</h1>
+            <label for="login_username">Username</label>
+            <input class="input" type="text" id="login_username" name="login_username">
+            <label for="login_password">Password</label>
+            <input class="input" type="password" id="login_password" name="login_password">
+            <input class="button" type="submit" name="button" value="login">
+        </form>
+    </div>
+    <div class=login-register-flash>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=login-register-flash>
+                {% for message in messages %}
+                    <li class=login-register-flash>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

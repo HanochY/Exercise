@@ -1,0 +1,18 @@
+div.content{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: left;
+    background-color: var(--background-color);
+    margin: 0;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    align-items: center;
+    justify-content: left;
+    font-size: 24px;
+}

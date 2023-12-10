@@ -1,0 +1,81 @@
+:root{
+    --background-color: white;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: rgb(212, 212, 212);
+    --border: var(--border-width) var(--border-style) var(--border-color);
+    --logo-height: 200px;
+    --logo-border-radius: 5vh;
+    --form-border-radius: 20px;
+    --input-border-radius: 18px;
+    --input-font-size: 18px;
+    --button-color: #04AA6D;
+    --button-transition-time: 0.4s;
+}
+
+.cock-img {
+    height: 20vh;
+    border-radius: var(--logo-border-radius);
+    margin: 20px;
+}
+.vertical-form{
+    border: var(--border);
+    border-radius: var(--form-border-radius);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 35px;
+    margin: 35px;
+}
+.horizontal-forms-div{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100vw;
+    height: 70vh;
+    justify-content: center;
+}
+.signin-signup-title{
+    font-weight: Bold;
+}
+.input{
+    border-radius: var(--input-border-radius);
+    border: var(--border);
+    font-size: var(--input-font-size);
+    padding: 18px;
+    margin: 9px;
+    margin-bottom: 32px;
+}
+.button {
+    font-weight: Bold;
+    border-radius: 10px;
+    background-color: var(--background-color); 
+    color: black; 
+    border: 2px solid var(--button-color);
+    text-align: center;
+    font-size: 24px;
+    transition-duration: var(--button-transition-time);
+    cursor: pointer;
+    padding: 16px 64px;
+}
+
+.button:hover {
+  background-color: var(--button-color);
+  color: var(--background-color);
+}
+div.login-register-flash{
+    height: 10vh;
+    width: 100vw;
+    justify-content: center;
+}
+ul.login-register-flash{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+li.login-register-flash{
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
