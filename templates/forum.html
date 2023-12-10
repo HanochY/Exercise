@@ -16,8 +16,13 @@
                     <div class="comment-and-picture">
                         <img class="cock-img" src="{{url_for('static', filename='wecluck.png')}}" alt="we live for this shit">
                         <div class="comment">
-                            <p class="comment-title">{{comment.user}}</p>
+                            <div class="comment-title-and-timestamp">
+                                <p class="comment-title">{{comment.user}}</p> 
+                                <p class="comment-timestamp">{{comment.timestamp.strftime("%Y-%m-%d %H:%M")}}</p>
+                            </div>
+                            
                             <p class="comment-content">{{comment.content}}</p>
+
                         </div>
                     </div>
                 {% endfor %}
