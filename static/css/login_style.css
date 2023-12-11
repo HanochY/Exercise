@@ -1,18 +1,3 @@
-:root{
-    --background-color: white;
-    --border-width: 1px;
-    --border-style: solid;
-    --border-color: rgb(212, 212, 212);
-    --border: var(--border-width) var(--border-style) var(--border-color);
-    --logo-height: 200px;
-    --logo-border-radius: 5vh;
-    --form-border-radius: 20px;
-    --input-border-radius: 18px;
-    --input-font-size: 18px;
-    --button-color: #04AA6D;
-    --button-transition-time: 0.4s;
-}
-
 .cock-img {
     height: 20vh;
     border-radius: var(--logo-border-radius);

@@ -63,6 +63,7 @@ def check_form_submitted_comment():
 
 
 def fetch_comment_input():
+   print('oo')
    content = request.form["forum_comment"]
    return content
 
@@ -84,7 +85,7 @@ def register_from_form():
 
 def post_comment_from_form():
    if check_form_submitted_comment():
-      user = session[user]
+      user = session['user']
       content = fetch_comment_input()
       post_comment(user, content)
 

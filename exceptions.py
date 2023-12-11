@@ -1,6 +1,6 @@
 ERROR_MESSAGE_USER_NOT_FOUND = 'User does not exist!'
-ERROR_MESSAGE_WRONG_PASSWORD = 'Incorrect password!' 
-ERROR_MESSAGE_USER_ALREADY_EXISTS = 'User already exists!' 
+ERROR_MESSAGE_WRONG_PASSWORD = 'Incorrect password!'
+ERROR_MESSAGE_USER_ALREADY_EXISTS = 'User already exists!'
 ERROR_MESSAGE_PASSWORD_CONFIRMATION_FAIL = 'Passwords do not match!'
 ERROR_MESSAGE_COMMENT_CONTENT_EMPTY = 'Comment empty!'
 

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/login_style.css') }}">
 {% endblock %}
 {% block content %}
-    <img class="cock-img" src="{{url_for('static', filename='wecluck.png')}}" alt="we live for this shit">
+    <img class="cock-img" src="{{url_for('static', filename='/img/wecluck.png')}}" alt="we live for this shit">
     <div class="horizontal-forms-div">
         <form class="vertical-form" method="post" id="register">
             <h1 class="signin-signup-title">Sign Up</h1>

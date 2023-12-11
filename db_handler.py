@@ -12,16 +12,21 @@ def create_user(username, password):
     database.session.add(new_user)
     database.session.commit()
 
+
 def commit_comment_submission(user, content):
     new_comment = Comment(user, content)
     database.session.add(new_comment)
     database.session.commit()
 
+
 def get_user_password(username):
-    return database.session.query(User.password).filter_by(name=username).first()[0]
+    return database.session.query(User.password)\
+            .filter_by(name=username).first()[0]
+
 
 def check_user_exists(username):
-    return bool(database.session.query(User._id).filter_by(name=username).first())
+    return bool(database.session.query(User._id).
+                filter_by(name=username).first())
 
 
 def validate_user_exists(username):
@@ -42,4 +47,3 @@ def validate_password_confirmation(password, confirm_password):
 def validate_username_available(username):
     if check_user_exists(username):
         raise UserAlreadyExistsError
-    

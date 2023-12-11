@@ -2,6 +2,19 @@
     --fullscreen-height: 100vh;
     --fullscreen-width: 100vw;
     --background-color: white;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: rgb(212, 212, 212);
+    --border: var(--border-width) var(--border-style) var(--border-color);
+    --logo-height: 200px;
+    --form-border-radius: 20px;
+    --input-border-radius: 18px;
+    --input-font-size: 18px;
+    --button-color: #04AA6D;
+    --button-transition-time: 0.4s;
+    --logo-border-radius: 50px;
+    --sidenav-width: 0px;
+    --sidenav-transition-time: 0.4s;
 }
 *{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
