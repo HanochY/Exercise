@@ -8,7 +8,6 @@ from exceptions import *
 
 
 def create_user(username, password):
-    
     new_user = User(username, password)
     database.session.add(new_user)
     database.session.commit()

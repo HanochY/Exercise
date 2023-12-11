@@ -1,12 +1,17 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash
+from flask import Flask, redirect, url_for,\
+                  render_template, request, session, flash
 import config
 from db_handler import database
 
+
 app = Flask(__name__)
 app.secret_key = config.SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+   config.SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = \
+   config.SQLALCHEMY_TRACK_MODIFICATIONS
 database.init_app(app)
+
 
 import db_handler
 from exceptions import *
@@ -46,7 +51,8 @@ def authenticate_registration(username, password, confirm_password):
    db_handler.validate_password_confirmation(password, confirm_password)
    db_handler.validate_username_available(username)
    db_handler.create_user(username, password)
-      
+
+
 def validate_comment_content():
    if request.form["forum_comment"] is None:
       raise EmptyCommentContentError
@@ -62,7 +68,6 @@ def fetch_comment_input():
 
 
 def post_comment(user, content):
-   
    validate_comment_content()
    db_handler.commit_comment_submission(user, content)
 
@@ -75,7 +80,6 @@ def login_from_form():
 def register_from_form():
    username, password, confirm_password = fetch_regsitration_input()
    authenticate_registration(username, password, confirm_password)
-  
 
 
 def post_comment_from_form():
@@ -94,7 +98,8 @@ def try_register():
       flash("User created!")
    finally:
       return redirect(url_for('home'))
-         
+
+
 def try_login():
    try:
       login_from_form()
@@ -126,14 +131,15 @@ def handle_forum_post():
 
 
 def handle_forum_get():
-   return render_template("forum.html", username=session['user'], comments=db_handler.Comment.query.all())
+   return render_template("forum.html", username=session['user'],
+                          comments=db_handler.Comment.query.all())
 
 
 def handle_account_info_get():
    return render_template("personal.html", username=session['user'])
 
 
-@app.route('/', methods=['POST','GET'])
+@app.route('/', methods=['POST', 'GET'])
 def home():
    if 'user' in session:
       commit_logout()
@@ -145,7 +151,7 @@ def home():
       return INVALID_REQUEST_ERROR_MESSAGE
 
 
-@app.route('/forum/', methods=['POST','GET'])
+@app.route('/forum/', methods=['POST', 'GET'])
 def forum():
    if 'user' not in session:
       return redirect(url_for("home"))
