@@ -40,22 +40,41 @@ def fetch_regsitration_input():
    confirm_password = request.form["confirm_register_password"]
    return username, password, confirm_password
 
+def validate_user_exists(username):
+    if not db_handler.check_user_exists(username):
+        raise UserNotFoundError
+
+
+def validate_password(username, password):
+    if not db_handler.get_user_password(username) == password:
+        raise WrongPasswordError
+
+
+def validate_password_confirmation(password, confirm_password):
+    if not password == confirm_password:
+        raise PasswordConfirmationError
+
+
+def validate_username_available(username):
+    if db_handler.check_user_exists(username):
+        raise UserAlreadyExistsError
+
+
+def validate_comment_content():
+   if not request.form["forum_comment"]:
+      raise EmptyCommentContentError
+
 
 def authenticate_login(username, password):
-   db_handler.validate_user_exists(username)
-   db_handler.validate_password(username, password)
+   validate_user_exists(username)
+   validate_password(username, password)
    commit_login(username)
 
 
 def authenticate_registration(username, password, confirm_password):
-   db_handler.validate_password_confirmation(password, confirm_password)
-   db_handler.validate_username_available(username)
+   validate_password_confirmation(password, confirm_password)
+   validate_username_available(username)
    db_handler.create_user(username, password)
-
-
-def validate_comment_content():
-   if request.form["forum_comment"] is None:
-      raise EmptyCommentContentError
 
 
 def check_form_submitted_comment():
@@ -63,7 +82,6 @@ def check_form_submitted_comment():
 
 
 def fetch_comment_input():
-   print('oo')
    content = request.form["forum_comment"]
    return content
 
