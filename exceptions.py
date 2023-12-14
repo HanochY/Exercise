@@ -3,7 +3,7 @@ ERROR_MESSAGE_WRONG_PASSWORD = 'Incorrect password!'
 ERROR_MESSAGE_USER_ALREADY_EXISTS = 'User already exists!'
 ERROR_MESSAGE_PASSWORD_CONFIRMATION_FAIL = 'Passwords do not match!'
 ERROR_MESSAGE_COMMENT_CONTENT_EMPTY = 'Comment empty!'
-
+ERROR_MESSAGE_TOPIC_NAME_EMPTY = 'Topic name not defined!'
 
 class UserNotFoundError(Exception):
     def __init__(self):
@@ -28,3 +28,8 @@ class PasswordConfirmationError(Exception):
 class EmptyCommentContentError(Exception):
     def __init__(self):
        self.message = ERROR_MESSAGE_COMMENT_CONTENT_EMPTY
+
+
+class EmptyTopicNameError(Exception):
+    def __init__(self):
+       self.message = ERROR_MESSAGE_TOPIC_NAME_EMPTY

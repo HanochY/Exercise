@@ -7,26 +7,30 @@
     <div class="submission-and-forum">
         <h1>Welcome {{ username }} to our cocky little forum</h1>
         <div class="forum">
-            <form class="submission-form" method="post" id="submit">
-                <textarea maxlength="256" class="textarea" type="text" id="forum_comment" name="forum_comment"></textarea>
-                <input class="button" type="submit" name="button" value="submit">
+            <form class="submission-form" method="post" id="comment">
+                <textarea maxlength="64" class="topic-textarea" type="text" id="comment_topic" name="comment_topic"></textarea>
+                <textarea maxlength="256" class="comment-textarea" type="text" id="forum_comment" name="forum_comment"></textarea>
+                <input class="button" type="submit" name="button" value="comment">
             </form>
-            <div class="comment-cotainer">
+            {% for topic in topics %}
+            <div class="topic">
+                <p>{{topic.name}}</p>
                 {% for comment in comments %}
-                    <div class="comment-and-picture">
-                        <img class="cock-img" src="{{url_for('static', filename='/img/wecluck.png')}}" alt="we live for this shit">
-                        <div class="comment">
-                            <div class="comment-title-and-timestamp">
-                                <p class="comment-title">{{comment.user}}</p> 
-                                <p class="comment-timestamp">{{comment.timestamp.strftime("%Y-%m-%d %H:%M")}}</p>
+                    {% if comment.topic_id == topic._id %}
+                        <div class="comment-and-picture">
+                            <img class="cock-img" src="{{url_for('static', filename='/img/wecluck.png')}}" alt="we live for this shit">
+                            <div class="comment">
+                                <div class="comment-title-and-timestamp">
+                                    <p class="comment-title">{{comment.user}}</p> 
+                                    <p class="comment-timestamp">{{comment.timestamp.strftime("%Y-%m-%d %H:%M")}}</p>
+                                </div>
+                                <p class="comment-content">{{comment.content}}</p>
                             </div>
-                            
-                            <p class="comment-content">{{comment.content}}</p>
-
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>       
 {% endblock %}

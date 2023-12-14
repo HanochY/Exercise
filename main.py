@@ -60,11 +60,6 @@ def validate_username_available(username):
         raise UserAlreadyExistsError
 
 
-def validate_comment_content():
-   if not request.form["forum_comment"]:
-      raise EmptyCommentContentError
-
-
 def authenticate_login(username, password):
    validate_user_exists(username)
    validate_password(username, password)
@@ -78,18 +73,29 @@ def authenticate_registration(username, password, confirm_password):
 
 
 def check_form_submitted_comment():
-   return request.form["button"] == "submit"
+   return request.form["button"] == "comment"
 
 
 def fetch_comment_input():
    content = request.form["forum_comment"]
    return content
 
+def fetch_topic_input():
+   content = request.form["comment_topic"]
+   return content
 
-def post_comment(user, content):
-   validate_comment_content()
-   db_handler.commit_comment_submission(user, content)
+def post_comment(user, content, topic_id):
+   if content:
+      db_handler.commit_comment_submission(user, content, topic_id)
+   else:
+      raise EmptyCommentContentError
 
+def create_topic(name):
+   if name:
+      db_handler.commit_topic_creation(name)
+   else:
+      raise EmptyTopicNameError
+   
 
 def login_from_form():
    username, password = fetch_login_input()
@@ -102,10 +108,14 @@ def register_from_form():
 
 
 def post_comment_from_form():
-   if check_form_submitted_comment():
-      user = session['user']
-      content = fetch_comment_input()
-      post_comment(user, content)
+   user = session['user']
+   content = fetch_comment_input()
+   topic_name = fetch_topic_input()
+   if not db_handler.check_topic_exists(topic_name):
+      print('tttt')
+      create_topic(topic_name)
+   topic_id = db_handler.get_topic_id_by_name(topic_name)
+   post_comment(user, content, topic_id)
 
 
 def try_register():
@@ -151,6 +161,7 @@ def handle_forum_post():
 
 def handle_forum_get():
    return render_template("forum.html", username=session['user'],
+                          topics=db_handler.Topic.query.all(),
                           comments=db_handler.Comment.query.all())
 
 
