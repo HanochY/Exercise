@@ -140,7 +140,7 @@ def try_login():
 
 
 def handle_home_post():
-   if request.form["button"] == "register":
+   if request.form["butto n"] == "register":
       return try_register()
    elif request.form["button"] == "login":
       return try_login()
