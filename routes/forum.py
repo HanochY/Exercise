@@ -1,32 +1,29 @@
-from flask import redirect, url_for, Blueprint,\
-                  render_template, request, session, flash
+from flask import Blueprint, request, jsonify
 from controllers.forum import *
-from config.app import app
 from utils.exceptions import *
 
 
 forum_blueprint = Blueprint("forum_blueprint", __name__)
 
 
-@forum_blueprint.route('/forum/', methods=['POST', 'GET'])
+@forum_blueprint.route('/get_comments/', methods=['GET'])
 def forum():
-   if 'user' not in session:
-      return redirect(url_for("login_blueprint.home"))
-   if request.method == 'POST':
-      try:
-         user = session['user']
-         content = request.form["forum_comment"]
-         topic_name = request.form["comment_topic"]
-         
-         post_comment(user, content, topic_name)
-      except EmptyCommentContentError:
-         pass
-      finally:
-         return redirect(url_for("forum_blueprint.forum"))
-   elif request.method == 'GET':
-      return render_template("forum.html", username=session['user'],
-                          topics=Topic.query.all(),
-                          comments=Comment.query.all())
+   try:
+      topics = list(map(lambda x: x.to_json(), Topic.query.all()))
+      comments = list(map(lambda x: x.to_json(), Comment.query.all()))
+      return jsonify({"topics": topics, "comments": comments})
+   except Exception as error:
+      return jsonify({"message": error.message}), 500
+
+@forum_blueprint.route('/post_comment/', methods=['POST'])
+def post_comment():
+   try:
+      user = request.json.get("username")
+      content = request.json.get("comment_content")
+      topic_name = request.json.get("comment_topic")
+      post_comment(user, content, topic_name)
+   except EmptyCommentContentError:
+      return jsonify({"message": "Comment must have content!"}), 400
    else:
-      return "ERROR: INVALID REQUEST"
+      return jsonify({"message": "Comment created!"}), 201
 
